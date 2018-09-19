@@ -1,3 +1,9 @@
 # Vagrant
-ansible/.vagrant/
-ansible/*.log
+.vagrant/
+*.log
+
+# Conductr deb package
+*.deb
+
+# Ansible
+*.retry

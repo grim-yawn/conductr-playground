@@ -1,6 +1,5 @@
 ---
-- hosts: all
-  tasks:
-    - name: Current host
-      debug:
-          msg: "Hello, from {{ ansible_hostname }}"
+- name: Configure conductr cluster
+  hosts: all
+  roles:
+    - conductr

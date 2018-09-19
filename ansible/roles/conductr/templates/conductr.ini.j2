@@ -1,0 +1,16 @@
+# Generally the default for production server usage...
+-J-server
+
+# Memory settings
+-J-Xms210m
+-J-Xmx256m
+
+# Enable debug logs
+-Dakka.loglevel=debug
+
+# Conductr IP to listen on
+-DCONDUCTR_IP={{ ansible_eth0.ipv4.address }}
+
+{% if conductr_is_follower %}
+--seed {{ conductr_leader }}
+{% endif %}

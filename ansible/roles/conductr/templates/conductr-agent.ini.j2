@@ -1,0 +1,22 @@
+
+# Generally the default for production server usage...
+-J-server
+
+# Memory settings
+-J-Xms105m
+-J-Xmx128m
+
+# Enabled debug logs
+-Dakka.loglevel=debug
+
+# Require access to cgroups if running on a platform that supports them.
+-Dconductr.agent.require-cgroups=true
+
+# Conductr IP to listen on
+-Dconductr.agent.ip={{ ansible_eth0.ipv4.address }}
+
+{% if conductr_is_follower %}
+--seed {{ conductr_leader }}
+{% endif %}
+
+--core-node {{ ansible_eth0.ipv4.address }}:9004

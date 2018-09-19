@@ -1,0 +1,55 @@
+---
+- name: Install JDK
+  become: true
+  apt:
+    name: openjdk-8-jdk
+    state: present
+
+- name: Copy conductr core deb package
+  copy:
+    dest: /tmp/conductr.deb
+    src: "conductr_{{ conductr_version }}.deb"
+
+- name: Install conductr core
+  become: true
+  apt:
+    deb: /tmp/conductr.deb
+    state: present
+
+- name: Set config for conductr
+  become: true
+  template:
+      dest: /usr/share/conductr/conf/conductr.ini
+      src: conductr.ini.j2
+  notify:
+    - restart conductr
+
+- name: Copy conductr agent deb package
+  copy:
+    dest: /tmp/conductr-agent.deb
+    src: "conductr-agent_{{ conductr_version }}.deb"
+
+- name: Install conductr agent
+  become: true
+  apt:
+    deb: /tmp/conductr-agent.deb
+    state: present
+
+- name: Set config for conductr-agent
+  become: true
+  template:
+      dest: /usr/share/conductr/conf/conductr-agent.ini
+      src: conductr-agent.ini.j2
+  notify:
+    - restart conductr-agent
+
+- name: Allow 'conductr-agent' to execute conductr-oci as passwordless sudo 
+  become: true
+  lineinfile:
+    dest: /etc/sudoers
+    state: present
+    line: 'conductr-agent ALL=(root) NOPASSWD:SETENV: /usr/share/conductr-agent/bin/conductr-oci'
+    validate: visudo -cf %s
+  notify:
+    - restart conductr-agent
+  when: conductr_is_follower
