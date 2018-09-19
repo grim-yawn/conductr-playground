@@ -1,0 +1,6 @@
+---
+- hosts: all
+  tasks:
+    - name: Current host
+      debug:
+          msg: "Hello, from {{ ansible_hostname }}"
