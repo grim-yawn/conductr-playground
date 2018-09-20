@@ -22,8 +22,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         ansible.extra_vars = {
           # Conductr core vars
           conductr_listen_ip: "10.10.10.#{20 + i}",
-          conductr_is_follower: (i != 1),
-          conductr_leader: "10.10.10.21",
+          conductr_seed: (i != 1) ? "10.10.10.21": "",
 
           # Conductr agent vars
           conductr_agent_listen_ip: "10.10.10.#{20 + i}",

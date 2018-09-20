@@ -1,4 +1,3 @@
 ---
 conductr_listen_ip: 0.0.0.0
-conductr_is_follower: false
-conductr_leader: 127.0.0.1
+conductr_seed: ""

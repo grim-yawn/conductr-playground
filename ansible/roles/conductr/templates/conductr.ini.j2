@@ -12,6 +12,6 @@
 # Conductr IP to listen on
 -Dconductr.ip={{ conductr_listen_ip }}
 
-{% if conductr_is_follower %}
---seed {{ conductr_leader }}:9004
+{% if conductr_seed %}
+--seed {{ conductr_seed }}:9004
 {% endif %}
