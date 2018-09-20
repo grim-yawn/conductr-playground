@@ -10,7 +10,7 @@
 -Dcontrail.syslog.server.elasticsearch.enabled=off
 
 # Conductr IP to listen on
--Dconductr.ip={{ conductr_core_listen_ip }}
+-Dconductr.ip={{ conductr_listen_ip }}
 
 {% if conductr_is_follower %}
 --seed {{ conductr_leader }}:9004

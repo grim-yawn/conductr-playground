@@ -14,6 +14,6 @@
 -Dconductr.agent.require-cgroups=true
 
 # Conductr IP to listen on
--Dconductr.agent.ip={{ conductr_core_listen_ip }}
+-Dconductr.agent.ip={{ conductr_agent_listen_ip }}
 
---core-node {{ conductr_core_listen_ip }}:9004
+--core-node {{ conductr_agent_core_ip }}:9004

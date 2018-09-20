@@ -4,9 +4,3 @@
   systemd:
     name: conductr
     state: restarted
-
-- name: restart conductr-agent
-  become: true
-  systemd:
-    name: conductr-agent
-    state: restarted

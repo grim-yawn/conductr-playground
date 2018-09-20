@@ -1,0 +1,3 @@
+---
+conductr_agent_listen_ip: 0.0.0.0
+conductr_agent_core_ip: 127.0.0.1
