@@ -6,9 +6,9 @@
 -J-Xms105m
 -J-Xmx128m
 
-# Enabled debug logs
--Dakka.loglevel=debug
--Dcontrail.syslog.server.elasticsearch.enabled=off
+# Enabled more logs
+-Dakka.loglevel=info
+-Dconductr.service-locator-server.external-service-addresses.elastic-search.0=http://127.0.0.1:514
 
 # Require access to cgroups if running on a platform that supports them.
 -Dconductr.agent.require-cgroups=true
@@ -17,3 +17,7 @@
 -Dconductr.agent.ip={{ conductr_agent_listen_ip }}
 
 --core-node {{ conductr_agent_core_ip }}:9004
+
+# Set up roles
+-Dconductr.agent.roles.0=web
+-Dconductr.agent.roles.1=haproxy

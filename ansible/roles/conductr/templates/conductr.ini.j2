@@ -6,8 +6,8 @@
 -J-Xmx256m
 
 # Enable debug logs
--Dakka.loglevel=debug
--Dcontrail.syslog.server.elasticsearch.enabled=off
+-Dakka.loglevel=info
+-Dconductr.service-locator-server.external-service-addresses.elastic-search.0=http://127.0.0.1:514
 
 # Conductr IP to listen on
 -Dconductr.ip={{ conductr_listen_ip }}

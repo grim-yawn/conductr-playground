@@ -4,3 +4,9 @@
   systemd:
     name: conductr
     state: restarted
+
+- name: restart rsyslog
+  become: true
+  systemd:
+    name: rsyslog
+    state: restarted

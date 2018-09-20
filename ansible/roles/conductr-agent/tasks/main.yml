@@ -2,7 +2,7 @@
 - name: Copy conductr agent deb package
   copy:
     dest: /tmp/conductr-agent.deb
-    src: "conductr-agent_{{ conductr_version }}.deb"
+    src: "conductr-agent_{{ conductr_agent_version }}.deb"
 
 - name: Install conductr agent
   become: true
@@ -24,6 +24,38 @@
     dest: /etc/sudoers
     state: present
     line: 'conductr-agent ALL=(root) NOPASSWD:SETENV: /usr/share/conductr-agent/bin/conductr-oci'
+    validate: visudo -cf %s
+  notify:
+    - restart conductr-agent
+
+- name: Install HAproxy an agent
+  become: true
+  apt:
+    name: haproxy
+    state: latest
+
+- name: Let conductr-agent own haproxy conf
+  become: true
+  file:
+    path: /etc/haproxy/haproxy.cfg
+    owner: conductr-agent
+    group: conductr-agent
+
+- name: Create HAproxy startup script
+  become: true
+  file:
+    state: touch
+    mode: 0770
+    path: /usr/bin/reloadHAproxy.sh
+    owner: conductr-agent
+    group: conductr-agent
+
+- name: Allow 'conductr-agent' to reload HA proxy as passwordless sudo 
+  become: true
+  lineinfile:
+    dest: /etc/sudoers
+    state: present
+    line: 'conductr-agent ALL=(root) NOPASSWD: /usr/bin/reloadHAProxy.sh'
     validate: visudo -cf %s
   notify:
     - restart conductr-agent

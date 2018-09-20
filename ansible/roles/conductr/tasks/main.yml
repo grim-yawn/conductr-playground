@@ -23,3 +23,11 @@
       src: conductr.ini.j2
   notify:
     - restart conductr
+
+- name: Create rsyslog config
+  become: true
+  template:
+    dest: /etc/rsyslog.d/conductr.conf
+    src: rsyslog.d/conductr.conf.j2
+  notify:
+    - restart rsyslog
