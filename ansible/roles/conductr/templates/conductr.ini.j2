@@ -7,10 +7,11 @@
 
 # Enable debug logs
 -Dakka.loglevel=debug
+-Dcontrail.syslog.server.elasticsearch.enabled=off
 
 # Conductr IP to listen on
--DCONDUCTR_IP={{ ansible_eth0.ipv4.address }}
+-Dconductr.ip={{ conductr_core_listen_ip }}
 
 {% if conductr_is_follower %}
---seed {{ conductr_leader }}
+--seed {{ conductr_leader }}:9004
 {% endif %}

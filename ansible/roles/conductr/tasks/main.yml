@@ -38,7 +38,7 @@
 - name: Set config for conductr-agent
   become: true
   template:
-      dest: /usr/share/conductr/conf/conductr-agent.ini
+      dest: /usr/share/conductr-agent/conf/conductr-agent.ini
       src: conductr-agent.ini.j2
   notify:
     - restart conductr-agent
@@ -52,4 +52,3 @@
     validate: visudo -cf %s
   notify:
     - restart conductr-agent
-  when: conductr_is_follower

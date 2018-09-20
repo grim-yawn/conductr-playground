@@ -8,15 +8,12 @@
 
 # Enabled debug logs
 -Dakka.loglevel=debug
+-Dcontrail.syslog.server.elasticsearch.enabled=off
 
 # Require access to cgroups if running on a platform that supports them.
 -Dconductr.agent.require-cgroups=true
 
 # Conductr IP to listen on
--Dconductr.agent.ip={{ ansible_eth0.ipv4.address }}
+-Dconductr.agent.ip={{ conductr_core_listen_ip }}
 
-{% if conductr_is_follower %}
---seed {{ conductr_leader }}
-{% endif %}
-
---core-node {{ ansible_eth0.ipv4.address }}:9004
+--core-node {{ conductr_core_listen_ip }}:9004
