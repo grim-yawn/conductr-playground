@@ -10,8 +10,8 @@
 -Dconductr.service-locator-server.external-service-addresses.elastic-search.0=http://127.0.0.1:514
 
 # Conductr IP to listen on
--Dconductr.ip={{ conductr_listen_ip }}
+-Dconductr.ip={{ ansible_default_ipv4.address }}
 
-{% if conductr_seed %}
---seed {{ conductr_seed }}:9004
+{% if 'seeds' not in group_names %}
+--seed {{ hostvars[groups['seeds'][0]].ansible_default_ipv4.address }}:9004
 {% endif %}

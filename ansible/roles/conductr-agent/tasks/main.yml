@@ -43,10 +43,11 @@
 
 - name: Create HAproxy startup script
   become: true
-  file:
-    state: touch
+  copy:
+    content: ""
+    force: false
     mode: 0770
-    path: /usr/bin/reloadHAproxy.sh
+    dest: /usr/bin/reloadHAproxy.sh
     owner: conductr-agent
     group: conductr-agent
 
