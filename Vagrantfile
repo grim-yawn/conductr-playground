@@ -23,6 +23,23 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
           ansible.groups = {
             "seeds" => ["node-1"]
           }
+          ansible.host_vars = {
+            "node-1" => {
+              "conductr_listen_ip" => "10.10.10.21",
+              "conductr_agent_listen_ip" => "10.10.10.21",
+              "conductr_agent_core_ip" => "10.10.10.21",
+            },
+            "node-2" => {
+              "conductr_listen_ip" => "10.10.10.22",
+              "conductr_agent_listen_ip" => "10.10.10.22",
+              "conductr_agent_core_ip" => "10.10.10.22",
+            },
+            "node-3" => {
+              "conductr_listen_ip" => "10.10.10.23",
+              "conductr_agent_listen_ip" => "10.10.10.23",
+              "conductr_agent_core_ip" => "10.10.10.23",
+            },
+          }
         end
       end
     end
