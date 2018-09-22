@@ -7,3 +7,9 @@
 
 # Ansible
 *.retry
+
+# Terraform
+.terraform
+
+# GCP
+terraform/account.json
