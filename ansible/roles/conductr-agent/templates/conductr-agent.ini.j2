@@ -14,9 +14,9 @@
 -Dconductr.agent.require-cgroups=true
 
 # Conductr IP to listen on
--Dconductr.agent.ip={{ conductr_agent_bind_ip }}
+-Dconductr.agent.ip={{ ansible_default_ipv4.address }}
 
---core-node {{ conductr_agent_core_ip }}:9004
+--core-node {{ ansible_default_ipv4.address }}:9004
 
 # Set up roles
 -Dconductr.agent.roles.0=web
