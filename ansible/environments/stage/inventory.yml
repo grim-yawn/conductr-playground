@@ -1,6 +1,6 @@
 all:
     hosts:
-        node_1: 
+        node_1:
             ansible_host: 35.237.15.227
         node_2:
             ansible_host: 35.196.36.98

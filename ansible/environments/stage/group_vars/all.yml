@@ -1,4 +1,7 @@
-conductr_seed_ip: 10.142.0.3
+# Conductr core vars
+conductr_seed_ip: 35.237.15.227
 conductr_bind_ip: 0.0.0.0
+
+# Conductr agent vars
 conductr_agent_bind_ip: 0.0.0.0
 conductr_agent_core_ip: 127.0.0.1
