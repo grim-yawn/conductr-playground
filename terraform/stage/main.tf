@@ -1,7 +1,7 @@
 terraform {
   backend "gcs" {
     bucket = "harbinger-212217-state"
-    prefix = "prod"
+    prefix = "stage"
   }
 }
 
@@ -17,7 +17,7 @@ resource "google_compute_instance" "conductr" {
   count = 3
 
   name = "conductr-node-${count.index}"
-  tags = ["conductr", "prod"]
+  tags = ["conductr", "stage"]
 
   machine_type = "g1-small"
 
@@ -62,6 +62,18 @@ resource "google_compute_firewall" "conductr_agent_access" {
   }
 
   target_tags = ["conductr"]
+
+  source_ranges = ["${var.agent_access_source_ranges}"]
+}
+
+resource "google_compute_firewall" "allow_ssh" {
+  name    = "allow-ssh-access-default"
+  network = "default"
+
+  allow {
+    protocol = "tcp"
+    ports    = ["22"]
+  }
 
   source_ranges = ["${var.agent_access_source_ranges}"]
 }
