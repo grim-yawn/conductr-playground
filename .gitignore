@@ -10,6 +10,4 @@
 
 # Terraform
 .terraform
-
-# GCP
-terraform/account.json
+terraform.tfvars
