@@ -1,9 +1,10 @@
 plugin: gcp_compute
-projects: 
+strict: true
+projects:
     - harbinger-212217
 filters:
-    - tags.items = conductr
+    - labels.environment = stage
 groups:
-    seeds: "'seeds' in tags"
+    seeds: labels.conductr == 'seed'
 auth_kind: serviceaccount
 service_account_file: ./service_account.json
