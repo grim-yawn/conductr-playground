@@ -1,4 +1,6 @@
 terraform {
+  required_version = "0.11.8"
+
   backend "gcs" {
     bucket = "harbinger-212217-state"
     prefix = "stage"
