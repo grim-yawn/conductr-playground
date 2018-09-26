@@ -11,3 +11,6 @@
 # Terraform
 .terraform
 terraform.tfvars
+
+# GCP
+service_account.json

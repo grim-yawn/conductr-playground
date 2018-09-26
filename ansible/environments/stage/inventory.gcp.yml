@@ -1,0 +1,9 @@
+plugin: gcp_compute
+projects: 
+    - harbinger-212217
+filters:
+    - tags.items = conductr
+groups:
+    seeds: "'seeds' in tags"
+auth_kind: serviceaccount
+service_account_file: ./service_account.json

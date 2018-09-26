@@ -12,6 +12,6 @@
 # Conductr IP to listen on
 -Dconductr.ip={{ ansible_default_ipv4.address }}
 
-{% if 'seeds' not in group_names %}
---seed {{ conductr_seed_ip }}:9004
+{% if 'seeds' not in tags %}
+--seed {{ hostvars }}:9004
 {% endif %}

@@ -10,7 +10,7 @@ terraform {
 provider "google" {
   version = "1.18.0"
 
-  project = "habringer-212217"
+  project = "harbinger-212217"
   region  = "us-east1"
 }
 

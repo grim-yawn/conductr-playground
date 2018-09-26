@@ -5,8 +5,12 @@ name = "pypi"
 
 [packages]
 ansible = ">=2.4"
+requests = "*"
+google-auth = "*"
 
 [dev-packages]
+pylint = "*"
+autopep8 = "*"
 
 [requires]
 python_version = "3.7"

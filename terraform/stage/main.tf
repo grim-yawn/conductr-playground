@@ -15,8 +15,35 @@ provider "google" {
   zone    = "us-east1-b"
 }
 
+resource "google_compute_instance" "conductr_seeds" {
+  count = 1
+
+  name = "conductr-seed-${count.index}"
+  tags = ["conductr", "stage", "seed"]
+
+  machine_type = "${var.conductr_machine_type}"
+
+  boot_disk {
+    initialize_params {
+      image = "${var.conductr_base_image}"
+    }
+  }
+
+  network_interface {
+    network = "default"
+
+    access_config {}
+  }
+
+  metadata {
+    ssh-keys = "appuser:${file(var.ssh_public_key_file)}"
+  }
+
+  allow_stopping_for_update = true
+}
+
 resource "google_compute_instance" "conductr" {
-  count = 3
+  count = 2
 
   name = "conductr-node-${count.index}"
   tags = ["conductr", "stage"]

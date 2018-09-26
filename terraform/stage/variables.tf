@@ -3,12 +3,13 @@ variable "ssh_public_key_file" {
 }
 
 variable "agent_access_source_ranges" {
+  type        = "list"
   description = "IP range to permit access to conductr agent API"
 }
 
 variable "conductr_machine_type" {
   description = "Machine type for conductr instances"
-  default     = "n1-standard-1"
+  default     = "custom-1-2816"
 }
 
 variable "conductr_base_image" {
