@@ -1,10 +1,4 @@
 ---
-- name: Install JDK
-  become: true
-  apt:
-    name: openjdk-8-jdk
-    state: present
-
 - name: Copy conductr core deb package
   copy:
     dest: /tmp/conductr.deb

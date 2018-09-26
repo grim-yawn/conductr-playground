@@ -2,5 +2,10 @@
 - name: Configure conductr cluster
   hosts: all
   roles:
+    - role: geerlingguy.java
+      become: true
+      java_packages:
+        - openjdk-8-jdk
+      tags: install
     - conductr
     - conductr-agent

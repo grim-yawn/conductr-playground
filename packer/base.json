@@ -1,0 +1,32 @@
+{
+    "variables": {
+        "project_id": "harbinger-212217",
+        "zone": "us-east1-b",
+        "source_image_family": "ubuntu-1804-lts",
+        "image_family": "conductr-base"
+    },
+    "builders": [
+        {
+            "type": "googlecompute",
+            "project_id": "{{ user `project_id` }}",
+            "zone": "{{ user `zone` }}",
+            "source_image_family": "{{ user `source_image_family` }}",
+            "image_family": "{{ user `image_family` }}",
+            "image_name": "{{ user `image_family` }}-{{ timestamp }}",
+            "ssh_username": "appuser"
+        }
+    ],
+    "provisioners": [
+        {
+            "type": "ansible",
+            "playbook_file": "ansible/playbooks/site.yml",
+            "extra_arguments": [
+                "--tags",
+                "install"
+            ],
+            "ansible_env_vars": [
+                "ANSIBLE_ROLES_PATH={{ pwd }}/ansible/imported_roles:{{ pwd }}/ansible/roles"
+            ]
+        }
+    ]
+}
