@@ -25,6 +25,8 @@ resource "google_compute_instance" "conductr" {
     conductr    = "${count.index == 0 ? "seed": "node"}"
   }
 
+  tags = ["stage", "conductr"]
+
   machine_type = "${var.conductr_machine_type}"
 
   boot_disk {
