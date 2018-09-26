@@ -21,11 +21,11 @@ resource "google_compute_instance" "conductr" {
   name = "conductr-node-${count.index}"
   tags = ["conductr", "stage"]
 
-  machine_type = "g1-small"
+  machine_type = "${var.conductr_machine_type}"
 
   boot_disk {
     initialize_params {
-      image = "ubuntu-1804-lts"
+      image = "${var.conductr_base_image}"
     }
   }
 
@@ -38,6 +38,8 @@ resource "google_compute_instance" "conductr" {
   metadata {
     ssh-keys = "appuser:${file(var.ssh_public_key_file)}"
   }
+
+  allow_stopping_for_update = true
 }
 
 resource "google_compute_firewall" "conductr_core" {
