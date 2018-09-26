@@ -1,27 +1,12 @@
 ---
-- name: Copy conductr core deb package
-  copy:
-    dest: /tmp/conductr.deb
-    src: "conductr_{{ conductr_version }}.deb"
+- import_tasks: install.yml
+  tags:
+    - install
 
-- name: Install conductr core
-  become: true
-  apt:
-    deb: /tmp/conductr.deb
-    state: present
+- import_tasks: configure.yml
+  tags:
+    - configure
 
-- name: Set config for conductr
-  become: true
-  template:
-      dest: /usr/share/conductr/conf/conductr.ini
-      src: conductr.ini.j2
-  notify:
-    - restart conductr
-
-- name: Create rsyslog config
-  become: true
-  template:
-    dest: /etc/rsyslog.d/conductr.conf
-    src: rsyslog.d/conductr.conf.j2
-  notify:
-    - restart rsyslog
+- import_tasks: deploy.yml
+  tags:
+    - deploy

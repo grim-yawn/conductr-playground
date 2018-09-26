@@ -1,14 +1,19 @@
 ---
-- name: Copy conductr agent deb package
-  copy:
-    dest: /tmp/conductr-agent.deb
-    src: "conductr-agent_{{ conductr_agent_version }}.deb"
-
-- name: Install conductr agent
+- name: Set config for conductr
   become: true
-  apt:
-    deb: /tmp/conductr-agent.deb
-    state: present
+  template:
+      dest: /usr/share/conductr/conf/conductr.ini
+      src: conductr.ini.j2
+  notify:
+    - restart conductr
+
+- name: Create rsyslog config
+  become: true
+  template:
+    dest: /etc/rsyslog.d/conductr.conf
+    src: rsyslog.d/conductr.conf.j2
+  notify:
+    - restart rsyslog
 
 - name: Set config for conductr-agent
   become: true
@@ -27,12 +32,6 @@
     validate: visudo -cf %s
   notify:
     - restart conductr-agent
-
-- name: Install HAproxy an agent
-  become: true
-  apt:
-    name: haproxy
-    state: latest
 
 - name: Let conductr-agent own haproxy conf
   become: true

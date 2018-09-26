@@ -1,0 +1,6 @@
+---
+- name: Load haproxy bundle
+  shell: CONDUCTR_HOST={{ ansible_host | quote }} conduct load conductr-haproxy
+
+- name: Run haproxy bundles
+  shell: CONDUCTR_HOST={{ ansible_host | quote }} conduct run conductr-haproxy --scale {{ ansible_play_hosts | length }}
