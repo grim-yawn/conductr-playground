@@ -54,7 +54,7 @@ resource "google_compute_firewall" "conductr_core" {
 
   allow {
     protocol = "tcp"
-    ports    = ["9004", "9006", "10000-10999"]
+    ports    = ["9004", "9005", "9006", "10000-10999"]
   }
 
   target_tags = ["conductr"]
@@ -62,18 +62,18 @@ resource "google_compute_firewall" "conductr_core" {
   source_tags = ["conductr"]
 }
 
-resource "google_compute_firewall" "conductr_agent_access" {
-  name    = "allow-conductr-agent-access-default"
+resource "google_compute_firewall" "conductr_executions_access" {
+  name    = "allow-conductr-executions-access-default"
   network = "default"
 
   allow {
     protocol = "tcp"
-    ports    = ["9005"]
+    ports    = ["10000-10999"]
   }
 
   target_tags = ["conductr"]
 
-  source_ranges = ["${var.agent_access_source_ranges}"]
+  source_ranges = ["0.0.0.0/0"]
 }
 
 resource "google_compute_firewall" "allow_ssh" {

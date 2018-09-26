@@ -7,13 +7,13 @@
     CONDUCTR_HOST: "{{ ansible_default_ipv4.address }}"
   run_once: true
 
-- name: Load haproxy bundle
+- name: Load conductr-haproxy
   command: conduct load conductr-haproxy
   environment:
     CONDUCTR_HOST: "{{ ansible_default_ipv4.address }}"
   run_once: true
 
-- name: Run haproxy bundles
+- name: Run conductr-haproxy
   command: conduct run conductr-haproxy --scale {{ ansible_play_hosts | length }}
   environment:
     CONDUCTR_HOST: "{{ ansible_default_ipv4.address }}"
@@ -27,6 +27,24 @@
 
 - name: Run visualizer
   command: conduct run visualizer --scale 2
+  environment:
+    CONDUCTR_HOST: "{{ ansible_default_ipv4.address }}"
+  run_once: true
+
+- name: Load reactive-maps
+  shell: >
+    conduct load reactive-maps-backend-region &&
+    conduct load reactive-maps-backend-summary &&
+    conduct load reactive-maps-frontend
+  environment:
+    CONDUCTR_HOST: "{{ ansible_default_ipv4.address }}"
+  run_once: true
+
+- name: Run reactive-maps
+  shell: >
+    conduct run reactive-maps-backend-region &&
+    conduct run reactive-maps-backend-summary --affinity reactive-maps-backend-region &&
+    conduct run reactive-maps-frontend
   environment:
     CONDUCTR_HOST: "{{ ansible_default_ipv4.address }}"
   run_once: true
