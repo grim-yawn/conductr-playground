@@ -1,18 +1,32 @@
 ---
 - name: Load license
-  command: >
-    conduct load-license --host {{ ansible_default_ipv4.address | quote }}
+  command: conduct load-license
   args:
     stdin: "{{ conductr_license_key | mandatory }}"
+  environment:
+    CONDUCTR_HOST: "{{ ansible_default_ipv4.address }}"
   run_once: true
 
 - name: Load haproxy bundle
-  command: >
-    conduct load --host {{ ansible_default_ipv4.address | quote }} conductr-haproxy
+  command: conduct load conductr-haproxy
+  environment:
+    CONDUCTR_HOST: "{{ ansible_default_ipv4.address }}"
   run_once: true
 
 - name: Run haproxy bundles
-  command: >
-    conduct run --host {{ ansible_default_ipv4.address | quote }} 
-    conductr-haproxy --scale {{ ansible_play_hosts | length }}
+  command: conduct run conductr-haproxy --scale {{ ansible_play_hosts | length }}
+  environment:
+    CONDUCTR_HOST: "{{ ansible_default_ipv4.address }}"
+  run_once: true
+
+- name: Load visualizer
+  command: conduct load visualizer
+  environment:
+    CONDUCTR_HOST: "{{ ansible_default_ipv4.address }}"
+  run_once: true
+
+- name: Run visualizer
+  command: conduct run visualizer --scale 2
+  environment:
+    CONDUCTR_HOST: "{{ ansible_default_ipv4.address }}"
   run_once: true
