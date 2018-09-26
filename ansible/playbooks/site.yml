@@ -1,3 +1,7 @@
 ---
-- import_playbook: base.yml
-- import_playbook: conductr.yml
+- name: Configure conductr cluster
+  hosts: all
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+  roles:
+    - conductr

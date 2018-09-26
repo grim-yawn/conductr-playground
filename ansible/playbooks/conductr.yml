@@ -1,5 +1,0 @@
----
-- name: Configure conductr cluster
-  hosts: all
-  roles:
-    - conductr

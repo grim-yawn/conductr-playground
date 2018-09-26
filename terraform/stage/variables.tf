@@ -14,5 +14,5 @@ variable "conductr_machine_type" {
 
 variable "conductr_base_image" {
   description = "Base image for conductr instances"
-  default     = "conductr-base-1537978364"
+  default     = "conductr-base-1537997377"
 }
