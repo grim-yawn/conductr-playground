@@ -15,3 +15,7 @@
 {% if 'seeds' not in group_names %}
 --seed {{ hostvars[groups['seeds'][0]].networkInterfaces[0].networkIP }}:9004
 {% endif %}
+
+{% if env != 'production' %}
+--seed-node-file-disabled
+{% endif %}
