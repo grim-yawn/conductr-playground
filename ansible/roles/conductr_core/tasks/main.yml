@@ -1,0 +1,19 @@
+---
+- name: Copy conductr core deb package
+  copy:
+    dest: /tmp/conductr.deb
+    src: "conductr_{{ conductr_core.version }}.deb"
+
+- name: Install conductr core
+  become: true
+  apt:
+    deb: /tmp/conductr.deb
+    state: present
+
+- name: Set config for conductr
+  become: true
+  template:
+      dest: /usr/share/conductr/conf/conductr.ini
+      src: conductr.ini.j2
+  notify:
+    - restart conductr

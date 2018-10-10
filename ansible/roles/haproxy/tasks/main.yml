@@ -1,0 +1,6 @@
+---
+- name: Install HAproxy
+  become: true
+  apt:
+    name: haproxy
+    state: latest

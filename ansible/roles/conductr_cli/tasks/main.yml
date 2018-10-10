@@ -1,0 +1,13 @@
+---
+- name: Ensure unzip installed
+  become: true
+  apt:
+    name: unzip
+    state: present
+
+- name: Download conductr binaries
+  become: true
+  unarchive:
+    src: https://bintray.com/lightbend/generic/download_file?file_path=conductr-cli-{{ conductr_cli.version }}.zip
+    dest: /usr/local/bin
+    remote_src: true

@@ -1,0 +1,21 @@
+# Generally the default for production server usage...
+-J-server
+
+# Memory settings
+-J-Xms210m
+-J-Xmx256m
+
+# Enable debug logs
+-Dakka.loglevel=info
+-Dconductr.service-locator-server.external-service-addresses.elastic-search.0=http://127.0.0.1:514
+
+# Conductr IP to listen on
+-Dconductr.ip={{ ansible_default_ipv4.address }}
+
+{% if 'seeds' not in group_names %}
+--seed {{ conductr_core.seed }}:9004
+{% endif %}
+
+{% if conductr_core.seed_file_disabled %}
+--seed-node-file-disabled
+{% endif %}

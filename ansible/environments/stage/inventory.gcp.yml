@@ -7,6 +7,7 @@ filters:
 groups:
     seeds: labels.conductr == 'seed'
 compose:
-    env: stage
+    conductr_core:
+        seed: "{{ hostvars[groups['seeds'][0]].networkInterfaces[0].networkIP }}"
 auth_kind: serviceaccount
 service_account_file: ./service_account.json

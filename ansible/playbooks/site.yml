@@ -4,4 +4,9 @@
   vars:
     ansible_python_interpreter: /usr/bin/python3
   roles:
-    - conductr
+    - java
+    - haproxy
+    - rsyslog
+    - conductr_core
+    - conductr_agent
+    - conductr_cli

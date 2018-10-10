@@ -1,0 +1,14 @@
+---
+- name: Install rsyslog
+  become: true
+  apt:
+    name: rsyslog
+    state: latest
+
+- name: Create rsyslog config
+  become: true
+  template:
+    dest: /etc/rsyslog.d/conductr.conf
+    src: rsyslog.d/conductr.conf.j2
+  notify:
+    - restart rsyslog

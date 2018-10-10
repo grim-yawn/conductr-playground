@@ -1,0 +1,6 @@
+---
+- name: restart conductr
+  become: true
+  systemd:
+    name: conductr
+    state: restarted
