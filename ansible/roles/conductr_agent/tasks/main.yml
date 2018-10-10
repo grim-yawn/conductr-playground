@@ -44,3 +44,18 @@
     validate: visudo -cf %s
   notify:
     - restart conductr-agent
+
+- name: Update license
+  environment:
+    CONDUCTR_HOST: "{{ ansible_default_ipv4.address }}"
+  run_once: true
+  block:
+    - name: Check license
+      command: conduct info
+      register: conduct_info
+      changed_when: false
+    - name: Load license
+      command: conduct load-license
+      args:
+        stdin: "{{ conductr_agent.license_key | quote }}"
+      when: "conduct_info.stdout_lines[0].split(': ') == 'unknown'"

@@ -7,6 +7,6 @@
     - java
     - haproxy
     - rsyslog
+    - conductr_cli
     - conductr_core
     - conductr_agent
-    - conductr_cli

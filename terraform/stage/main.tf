@@ -68,7 +68,7 @@ resource "google_compute_firewall" "conductr_executions_access" {
 
   allow {
     protocol = "tcp"
-    ports    = ["10000-10999"]
+    ports    = ["9005", "10000-10999"]
   }
 
   target_tags = ["conductr"]
